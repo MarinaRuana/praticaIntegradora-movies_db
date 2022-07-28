@@ -33,7 +33,7 @@ public class Actors {
     @JsonIgnoreProperties({"actors", "genres"})
     private Movies favoriteMovie;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinTable(name = "actor_movie",
     joinColumns = @JoinColumn(name = "actor_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))
