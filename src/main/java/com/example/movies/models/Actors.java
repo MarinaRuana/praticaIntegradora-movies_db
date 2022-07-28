@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.engine.spi.CascadingActions;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,12 +28,12 @@ public class Actors {
 
     private double rating;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "favorite_movie_id")
     @JsonIgnoreProperties({"actors", "genres"})
     private Movies favoriteMovie;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "actor_movie",
     joinColumns = @JoinColumn(name = "actor_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "movie_id", referencedColumnName = "id"))

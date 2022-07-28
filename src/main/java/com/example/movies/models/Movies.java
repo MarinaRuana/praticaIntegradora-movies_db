@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,16 +30,17 @@ public class Movies {
 
     private Integer awards;
 
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date release_date;
 
     private Integer length;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "genre_id")
     @JsonIgnoreProperties("moviesList")
     private Genres genres;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany(mappedBy = "movies", cascade = CascadeType.REFRESH)
     @JsonIgnoreProperties({"favoriteMovie", "genres", "movies"})
     private List<Actors> actors;
 
