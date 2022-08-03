@@ -24,6 +24,6 @@ public class ActorsController {
 
     @PostMapping
     public ResponseEntity<Actors> saveNewActor(@RequestBody Actors newActor){
-        return ResponseEntity.ok(service.save(newActor));
+        return ResponseEntity.ok(service.saveActors(newActor));
     }
 }

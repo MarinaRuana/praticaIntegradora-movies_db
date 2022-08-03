@@ -16,16 +16,15 @@ public class ActorsService implements IActorsService{
     @Autowired
     private ActorsRepo actorsRepo;
 
-    @Autowired
-    private MoviesService moviesService;
 
-    @Transactional
     @Override
-    public Actors save(Actors newActor) {
-        List<Movies> movies = newActor.getMovies();
-        moviesService.saveAll(movies);
-        moviesService.save(newActor.getFavoriteMovie());
+    public Actors saveActors(Actors newActor) {
         return actorsRepo.save(newActor);
+    }
+
+    @Override
+    public List<Actors> saveAllActors(List<Actors> actorsList) {
+        return (List<Actors>) actorsRepo.saveAll(actorsList);
     }
 
 }

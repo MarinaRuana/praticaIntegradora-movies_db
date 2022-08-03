@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IMoviesService {
 
-    Movies save(Movies newMovie);
+    Movies saveMovies(Movies newMovie);
 
-    boolean existsById(long id);
+    boolean existsMoviesById(long id);
 
-    List<Movies> saveAll(List<Movies> moviesList);
+    List<Movies> saveAllMovies(List<Movies> moviesList);
 }

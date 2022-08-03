@@ -23,7 +23,6 @@ public class Movies {
 
     private Date updated_at;
 
-    @Column(nullable = false)
     private String title;
 
     private double rating;
@@ -40,8 +39,11 @@ public class Movies {
     @JsonIgnoreProperties("moviesList")
     private Genres genres;
 
-    @ManyToMany(mappedBy = "movies", cascade = CascadeType.REFRESH)
-    @JsonIgnoreProperties({"favoriteMovie", "genres", "movies"})
+    @ManyToMany(cascade = CascadeType.REFRESH)
+    @JoinTable(name = "actor_movie",
+            joinColumns = @JoinColumn(name ="movie_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name ="actor_id" , referencedColumnName = "id"))
+    @JsonIgnoreProperties({"movies", "favoriteMovie"})
     private List<Actors> actors;
 
 }
